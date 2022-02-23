@@ -1,44 +1,38 @@
-# 994. Rotting Oranges
+# 21. Merge Two Sorted Lists
 
-### Medium
+### Easy
 
 ---
 
-Youare given an m x n grid where each cell can have one of three values:\
+You are given the heads of two sorted linked lists list1 and list2.\
 
-- 0 representing an empty cell,
-- 1 representing a fresh orange, or
-- 2 representing a rotten orange.
-- Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten.
+Merge the two lists in a one sorted list. The list should be made by splicing together the nodes of the first two lists.\
 
-Return the minimum number of minutes that must elapse until no cell has a fresh orange. If this is impossible, return -1.\
+Return the head of the merged linked list.\
 
 ## Example 1:
 
 <pre>
-Input: grid = [[2,1,1],[1,1,0],[0,1,1]]
-Output: 4
+Input: list1 = [1,2,4], list2 = [1,3,4]
+Output: [1,1,2,3,4,4]
 </pre>
 
 ## Example 2:
 
 <pre>
-Input: grid = [[2,1,1],[0,1,1],[1,0,1]]
-Output: -1
-Explanation: The orange in the bottom left corner (row 2, column 0) is never rotten, because rotting only happens 4-directionally.
+Input: list1 = [], list2 = []
+Output: []
 </pre>
 
 ## Example 3:
 
 <pre>
-Input: grid = [[0,2]]
-Output: 0
-Explanation: Since there are already no fresh oranges at minute 0, the answer is just 0.
+Input: list1 = [], list2 = [0]
+Output: [0]
 </pre>
 
 ## Constraints:
 
-- m == grid.length
-- n == grid[i].length
-- 1 <= m, n <= 10
-- grid[i][j] is 0, 1, or 2.
+- The number of nodes in both lists is in the range [0, 50].
+- -100 <= Node.val <= 100
+- Both list1 and list2 are sorted in non-decreasing order.
