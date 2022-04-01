@@ -18,7 +18,7 @@ class Solution {
 }
 
 // BINARY SEARCH METHOD
-// MOST EFFICIENT O(logN)
+// MOST EFFICIENT O(log(n*m))
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         int n = matrix.length;
