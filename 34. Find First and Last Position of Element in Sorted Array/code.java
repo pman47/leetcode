@@ -1,46 +1,20 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        int[] result=new int[2];
-        result[0]=findStartIndex(nums,target);
-        result[1]=findEndIndex(nums,target);
-        return result;
-    }
-
-    public int findStartIndex(int[] nums, int target)
-    {
-        int start=0;
-        int end=nums.length-1;
-        
-        int index=-1;
-        while(start<=end)
-        {
-            int midpoint=start+(end-start)/2;
-            if(nums[midpoint]>=target)
-                end=midpoint-1;
-            else
-                start=midpoint+1;
-
-            if(nums[midpoint]==target)
-                index=midpoint;
+        int start = 0;
+        int end = nums.length-1;
+        while(start<=end){
+            int mid = start + (end-start)/2;
+            if(nums[mid]>=target) end=mid-1;
+            else start=mid+1;
         }
-        return index;
-    }
-    public int findEndIndex(int[] nums, int target)
-    {
-        int start=0;
-        int end=nums.length-1;
-        int index=-1;
-        while(start<=end)
-        {
-            int midpoint=start+(end-start)/2;
-            if(nums[midpoint]<=target)
-                start=midpoint+1;
-            else
-                end=midpoint-1;
-                
-            if(nums[midpoint]==target)
-                index=midpoint;
+        if(start>=nums.length || nums[start]!=target) return new int[]{-1,-1};
+        int first = start;
+        end = nums.length-1;
+        while(start<=end){
+            int mid = start +(end-start)/2;
+            if(nums[mid]==target) start = mid+1;
+            else end = mid-1;
         }
-        return index;
+        return new int[]{first,end};
     }
 }
