@@ -1,35 +1,34 @@
 class Solution {
     public int[][] updateMatrix(int[][] mat) {
+        int n = mat.length,m=mat[0].length;
+        int[][] ans = new int[n][m];
+        for(int[] rows : ans){
+            Arrays.fill(rows,Integer.MAX_VALUE/10);
+        }
         
-        int [][] dist = new int[mat.length][mat[0].length];
-        for (int[] row: dist)
-            Arrays.fill(row, Integer.MAX_VALUE-100000);
-        
-        for(int i = 0; i<mat.length; i++){
-            for(int j = 0; j<mat[0].length; j++){
-                if(mat[i][j]==0){
-                    dist[i][j]=0;
-                } else {
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(mat[i][j]==1){
                     if(i>0){
-                        dist[i][j] = Math.min(dist[i][j], dist[i-1][j]+1);
+                        ans[i][j]=Math.min(ans[i][j],ans[i-1][j]+1);
                     }
                     if(j>0){
-                        dist[i][j] = Math.min(dist[i][j], dist[i][j-1]+1);
+                        ans[i][j]=Math.min(ans[i][j],ans[i][j-1]+1);
                     }
-                }
+                }else ans[i][j]=0;
             }
         }
         
-        for(int i = mat.length-1; i>=0; i--){
-            for(int j = mat[0].length-1; j>=0; j--){
-                if(i<mat.length-1){
-                    dist[i][j] = Math.min(dist[i][j], dist[i+1][j]+1);
+        for(int i=n-1;i>=0;i--){
+            for(int j=m-1;j>=0;j--){
+                if(i<n-1){
+                    ans[i][j]=Math.min(ans[i][j],ans[i+1][j]+1);
                 }
-                if(j<mat[0].length-1){
-                    dist[i][j] = Math.min(dist[i][j], dist[i][j+1]+1);
+                if(j<m-1){
+                    ans[i][j]=Math.min(ans[i][j],ans[i][j+1]+1);
                 }
             }
         }
-        return dist;
+        return ans;
     }
 }
