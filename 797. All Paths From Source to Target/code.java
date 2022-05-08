@@ -1,24 +1,26 @@
 class Solution {
-    List<List<Integer>> paths;
+    List<List<Integer>> ans = new ArrayList<>();
+    int n,m;
+    public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        n = graph.length;
+        m = graph[0].length;
+        List<Integer> list = new ArrayList<>();
+        list.add(0);
+        dfs(0,graph,list);
+        return ans;
+    }
     
-    private void findPath(int source, int destination, List<Integer> currentPath, int[][] graph){
-        if(source == destination){
-            paths.add(new ArrayList<>(currentPath));
+    void dfs(int i,int[][] graph,List<Integer> list){
+        if(i==n-1){
+            ans.add(new ArrayList<>(list));
             return;
         }
-        for(int i = 0; i < graph[source].length; i++){
-            currentPath.add(graph[source][i]);
-            findPath(graph[source][i], destination, currentPath, graph);
-            currentPath.remove(currentPath.size()-1);
+        
+        for(int j=0;j<graph[i].length;j++){
+            list.add(graph[i][j]);
+            dfs(graph[i][j],graph,list);
+            list.remove(list.size()-1);
         }
     }
     
-    public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
-        paths = new ArrayList<>();
-        int n = graph.length;
-        ArrayList<Integer> currentPath = new ArrayList<>();
-        currentPath.add(0);
-        findPath(0, n-1, currentPath, graph);
-        return paths;
-    }
 }
