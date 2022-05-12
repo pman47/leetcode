@@ -1,43 +1,33 @@
 class Solution {
-    public List<List<Integer>> permuteUnique(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        Arrays.sort(nums);
-
-        Map<Integer, Integer> map = new HashMap<>();
-        //store the amount for each number
-        for (int num : nums) {
-            map.put(num, map.getOrDefault(num, 0) + 1);
-        }
-        backtrack(res, new ArrayList<>(), map, nums);
-        return res;
+    List<List<Integer>>ans= new ArrayList<>();
+    
+    public void swap(int i,int j,int[]nums){
+        int k=nums[i];
+        nums[i]=nums[j];
+        nums[j]=k;
     }
-
-    void backtrack(List<List<Integer>> res, List<Integer> path, Map<Integer, Integer> map, int[] nums) {
-        if (path.size() == nums.length) {
-            res.add(new ArrayList<>(path));
+    
+    public void fun(int k, int[]nums){
+        if(k==nums.length){
+            List<Integer>a= new ArrayList<>();
+        for(int x:nums)a.add(x);
+            ans.add(a);
             return;
         }
-
-        for (int i = 0; i < nums.length; i++) {
-            final int cur = nums[i];
-            if (i > 0 && cur == nums[i -1]) {
-                continue;
-            }
-
-            // no available number to use
-            if (map.get(cur) <= 0) {
-                continue;
-            }
-
-            //comsume the number
-            map.put(cur, map.get(cur) - 1);
-
-            path.add(cur);
-            backtrack(res, path, map, nums);
-            path.remove(path.size() - 1);
-
-            //revoke use
-            map.put(cur, map.get(cur) + 1);
+        HashSet<Integer>s=new HashSet<>();
+        
+        for(int i=k;i<nums.length;i++){
+          if(s.contains(nums[i]))continue;
+            s.add(nums[i]);
+            swap(i,k,nums);
+            fun(k+1,nums);
+            swap(i,k,nums);
+       
         }
+    }
+    public List<List<Integer>> permuteUnique(int[] nums) {
+       
+    fun(0,nums);
+        return ans;
     }
 }
